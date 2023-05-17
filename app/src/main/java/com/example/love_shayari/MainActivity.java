@@ -1,12 +1,12 @@
 package com.example.love_shayari;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     String shayariname[] = {"bewfa","god","holiimg","husband","kanjoos",
                             "love","loveshayari","married","officework","politics"};
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

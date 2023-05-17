@@ -1,12 +1,16 @@
 package com.example.love_shayari;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class Shayari_Thirdpage extends AppCompatActivity {
 
@@ -17,7 +21,7 @@ public class Shayari_Thirdpage extends AppCompatActivity {
                    R.drawable.gc_6,R.drawable.gc_7,R.drawable.gc_8,R.drawable.gc_9,R.drawable.gc_10,
                    R.drawable.gc_11,R.drawable.gc_12,R.drawable.gc_13,R.drawable.gc_14,R.drawable.gc_15};
 
-    GridView gridView;
+    GridView gridViewAda;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +65,20 @@ public class Shayari_Thirdpage extends AppCompatActivity {
         expand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-                bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);
+                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(Shayari_Thirdpage.this);
+                bottomSheetDialog.setContentView(R.layout.gridview);
+                ExpandAdapter adapter = new ExpandAdapter(Shayari_Thirdpage.this,gcarr);
+                gridViewAda=bottomSheetDialog.findViewById(R.id.Expand_Gridview);
+                gridViewAda.setAdapter(adapter);
+                bottomSheetDialog.show();
+
+                gridViewAda.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        textView.setBackgroundResource(gcarr[i]);
+                        bottomSheetDialog.dismiss();
+                    }
+                });
             }
         });
     }
