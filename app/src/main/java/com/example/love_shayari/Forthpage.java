@@ -1,6 +1,5 @@
 package com.example.love_shayari;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,33 +11,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-public class Shayari_Thirdpage extends AppCompatActivity {
+public class Forthpage extends AppCompatActivity {
 
     TextView textView;
-    ImageView reload,pencil,expand,copy;
+    ImageView forthpage_Reload,forthpage_expand;
     int count=0,i=0;
+
     GridView gridViewAda;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.thirdpage_toolspage);
-        textView = findViewById(R.id.thirdpagetool_shayaritxt);
-        reload = findViewById(R.id.thirdpagetool_Reload);
-        pencil = findViewById(R.id.thirdpagetool_Pencil);
-        expand = findViewById(R.id.thirdpagetool_Expand);
-        copy = findViewById(R.id.thirdpagetool_Copy);
+        setContentView(R.layout.forthpage);
+        textView = findViewById(R.id.forthpage_txt);
+        forthpage_Reload = findViewById(R.id.forthpage_Reload);
+        forthpage_expand = findViewById(R.id.forthpage_Expand);
 
         int position = getIntent().getIntExtra("pos",0);
         String shayari[] = getIntent().getStringArrayExtra("shayari");
 
         textView.setText(shayari[position]);
 
-        reload.setOnClickListener(new View.OnClickListener() {
+        forthpage_Reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(count<15)
                 {
-                    textView.setBackgroundResource(Configfile.gcarr[i]);
+                    textView.setBackgroundResource(Configfile.forthgcarr[i]);
                     i++;
                     count++;
                 }else
@@ -49,22 +47,12 @@ public class Shayari_Thirdpage extends AppCompatActivity {
             }
         });
 
-        pencil.setOnClickListener(new View.OnClickListener() {
+        forthpage_expand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Shayari_Thirdpage.this, Forthpage.class);
-                intent.putExtra("pos",position);
-                intent.putExtra("shayari",shayari);
-                startActivity(intent);
-            }
-        });
-
-        expand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(Shayari_Thirdpage.this);
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(Forthpage.this);
                 bottomSheetDialog.setContentView(R.layout.gridview);
-                ExpandAdapter adapter = new ExpandAdapter(Shayari_Thirdpage.this,Configfile.gcarr,shayari[position]);
+                ExpandAdapter adapter = new ExpandAdapter(Forthpage.this,Configfile.forthgcarr,shayari[position]);
                 gridViewAda=bottomSheetDialog.findViewById(R.id.Expand_Gridview);
                 gridViewAda.setAdapter(adapter);
                 bottomSheetDialog.show();
@@ -72,18 +60,12 @@ public class Shayari_Thirdpage extends AppCompatActivity {
                 gridViewAda.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        textView.setBackgroundResource(Configfile.gcarr[i]);
+                        textView.setBackgroundResource(Configfile.forthgcarr[i]);
                         bottomSheetDialog.dismiss();
                     }
                 });
             }
         });
 
-        copy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 }

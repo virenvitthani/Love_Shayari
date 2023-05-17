@@ -1,5 +1,6 @@
 package com.example.love_shayari;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +9,14 @@ import android.widget.TextView;
 
 public class ExpandAdapter extends BaseAdapter {
 
-    Shayari_Thirdpage shayari_thirdpage;
-    int [] gcarr;
-    TextView textView;
+    Activity activity;
+    int[] gcarr;
+    String shayari;
 
-    public ExpandAdapter(Shayari_Thirdpage shayari_thirdpage, int[] gcarr) {
-        this.shayari_thirdpage = shayari_thirdpage;
+    public ExpandAdapter(Activity activity, int[] gcarr, String shayari) {
+        this.activity = activity;
         this.gcarr = gcarr;
+        this.shayari = shayari;
     }
 
     @Override
@@ -34,9 +36,11 @@ public class ExpandAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = LayoutInflater.from(shayari_thirdpage).inflate(R.layout.gridview_itemfile,viewGroup,false);
+        view = LayoutInflater.from(activity).inflate(R.layout.gridview_itemfile,viewGroup,false);
         TextView textView = view.findViewById(R.id.gridview_itemfile_txt);
         textView.setBackgroundResource(gcarr[i]);
+        TextView textView1 = view.findViewById(R.id.gridview_itemfile_txt);
+        textView1.setText(shayari);
         return view;
     }
 }
