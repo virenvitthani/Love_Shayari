@@ -82,7 +82,7 @@
             android:src="@drawable/copy1"/>
 
         <ImageView
-            android:id="@+id/thirdpagetool_Previous"
+            android:id="@+id/thirdpagetool_Back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleX="0.6"

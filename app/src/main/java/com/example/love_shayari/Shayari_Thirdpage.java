@@ -12,12 +12,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import Adapter.ExpandAdapter;
+
 public class Shayari_Thirdpage extends AppCompatActivity {
 
-    TextView textView;
-    ImageView reload,pencil,expand,copy;
-    int count=0,i=0;
+    TextView textView,index;
+    ImageView reload,pencil,expand,copy,next,back;
+    String shayari[];
+    int count=0,i=0,a=0,b=1;
     GridView gridViewAda;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,9 @@ public class Shayari_Thirdpage extends AppCompatActivity {
         pencil = findViewById(R.id.thirdpagetool_Pencil);
         expand = findViewById(R.id.thirdpagetool_Expand);
         copy = findViewById(R.id.thirdpagetool_Copy);
+        next = findViewById(R.id.thirdpagetool_Next);
+        back = findViewById(R.id.thirdpagetool_Back);
+        index = findViewById(R.id.thirdpagetool_txt1);
 
         int position = getIntent().getIntExtra("pos",0);
         String shayari[] = getIntent().getStringArrayExtra("shayari");
@@ -56,6 +63,36 @@ public class Shayari_Thirdpage extends AppCompatActivity {
                 intent.putExtra("pos",position);
                 intent.putExtra("shayari",shayari);
                 startActivity(intent);
+            }
+        });
+
+        a=position;
+        b=a+1;
+        index.setText(""+b+"/"+shayari.length);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(a<shayari.length-1)
+                {
+                    a++;
+                    b=a+1;
+                    textView.setText(""+shayari[a]);
+                    index.setText(""+b+"/"+shayari.length);
+                }
+            }
+        });
+
+        a=position;
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(a>0)
+                {
+                    a--;
+                    b--;
+                    textView.setText(""+shayari[a]);
+                    index.setText(""+b+"/"+shayari.length);
+                }
             }
         });
 
